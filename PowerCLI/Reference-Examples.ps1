@@ -50,6 +50,7 @@ function Create-VM([string]$vmName, [string]$datastore) {
     New-VM -Name $vmName -Datastore $datastore -DiskGB 20 -MemoryGB 2    
 }
 
+#---
 # connect the the exsi server
 $server = Connect-VIServer -Verbose:$true -Server $EsxiHostName -User $EsxiUser -Password $EsxiPassword
 
