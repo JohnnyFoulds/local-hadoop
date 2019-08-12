@@ -1,7 +1,7 @@
 ﻿param
 (
 [Parameter(Mandatory = $false)] [String]$EsxiHostName = '192.168.3.100',
-[Parameter(Mandatory = $false)] [String]$vCenterHostName = '192.168.3.101',
+[Parameter(Mandatory = $false)] [String]$vCenterHostName = 'vcenter-server.lan',
 [Parameter(Mandatory = $false)] [String]$EsxiUser = 'root'#,
 #[Parameter(Mandatory = $true)] [String]$EsxiPassword
 )
@@ -51,37 +51,8 @@ function Create-VM([string]$vmName, [string]$datastore) {
     New-VM -Name $vmName -Datastore $datastore -DiskGB 20 -MemoryGB 2    
 }
 
-#--
-# create a clone of a virtual machie
-function Clone-VM([string]$vmName, [string]$datastore, [string]$sourceVM, [string]$referenceSnapshot) {
-    # get the source vm
-    $vmSource = Get-VM -Server $server -Name $sourceVM
-
-    # set up the creation paramaters
-    $cloneParams = @{
-        'Name' = $vmName
-        'Datastore' = $datastore 
-        'VM' = $vmSource 
-        'DiskStorageFormat' = 'thin'
-    }
-
-    # add the reference snapshot and LinkedClone paramaters if a snapshot was specified
-    if ($referenceSnapshot -ne "") {
-        $snapshot = Get-Snapshot -VM $vmSource -Name $referenceSnapshot
-
-        $cloneParams.Add("LinkedClone", $null)
-        $cloneParams.Add("ReferenceSnapshot", $snapshot)
-    }
-    
-    # clone the vm
-    New-VM @cloneParams
-}
-
-#New-vm -name clonevmtest -vm convert3  -datastore 250stor01-vmhost 10.250.11.1 -DiskStorageFormat thin
-#I suggest adding   -DiskStorageFormat  other wise it will use thick disks
-
 #---
-# connect the the exsi server
+# connect to the exsi server
 $server = Connect-VIServer -Verbose:$true -Server $EsxiHostName -User $EsxiUser -Password $EsxiPassword
 
 # show a list of all the virtual machines
@@ -96,10 +67,3 @@ $vmName = "Docker Development (Lubuntu 19.04)"
 
 # create a new virtual machine
 #Create-VM -vmName "CentOS 7.6 base" -datastore "mainDatastore"
-
-
-# clone a virtual machine
-#    - must conntect to vCenter and not EXSi host.
-#Clone-VM -vmName "Lubuntu Clone" -datastore "seagullDatastore" -sourceVM $vmName
-$server = Connect-VIServer -Verbose:$true -Server $vCenterHostName -User $EsxiUser -Password $EsxiPassword
-Clone-VM -vmName "Lubuntu Clone" -datastore "seagullDatastore" -sourceVM $vmName -referenceSnapshot "Clean Install"
