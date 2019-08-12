@@ -1,7 +1,7 @@
 ﻿param
 (
 [Parameter(Mandatory = $false)] [String]$vCenterHostName = 'vcenter-server.lan',
-[Parameter(Mandatory = $false)] [String]$vCenterUser = '"administrator@vsphere.local"'#,
+[Parameter(Mandatory = $false)] [String]$vCenterUser = 'administrator@vsphere.local'#,
 #[Parameter(Mandatory = $true)] [String]$vCenterPassword
 )
 
@@ -9,7 +9,7 @@
 # Create a new Linux VM
 function Create-LinuxVM([string]$vmName, [string]$datastore, [string]$dnsServer, [string]$domain) {
     # create the os customization spec
-    New-OSCustomizationSpec -Server $server -DnsServer $dnsServer -Domain $domain -OSType Linux
+    New-OSCustomizationSpec -Server $server -DnsServer $dnsServer -Domain $domain -OSType Linux -Type NonPersistent
 }
 
 #--
