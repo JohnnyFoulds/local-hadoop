@@ -26,19 +26,20 @@ function Change-VMDatastore([string]$vmName, [string]$datastore) {
 
 #--
 # create a clone of a virtual machie
-function Clone-VM([string]$vmName, [string]$datastore, [string]$sourceVM, [string]$referenceSnapshot) {
+function Clone-VM([string]$vmName, [string]$datastore, [string]$sourceVM, [string]$referenceSnapshot, [string]$vmHost) {
     # get the source vm
     $vmSource = Get-VM -Server $server -Name $sourceVM
 
-    # set up the creation paramaters
+    # set up the creation parameters
     $cloneParams = @{
         'Name' = $vmName
         'Datastore' = $datastore 
         'VM' = $vmSource 
         'DiskStorageFormat' = 'thin'
+        'VMHost' = $vmHost
     }
 
-    # add the reference snapshot and LinkedClone paramaters if a snapshot was specified
+    # add the reference snapshot and LinkedClone parameters if a snapshot was specified
     if ($referenceSnapshot -ne "") {
         $snapshot = Get-Snapshot -VM $vmSource -Name $referenceSnapshot
 
@@ -62,9 +63,9 @@ $server = Connect-VIServer -Verbose:$true -Server $vCenterHostName -User $vCente
 #Create-LinuxVM -vmName "CentOS 7.6 base" -datastore "mainDatastore" -isopath "[omvDatastore] iso\CentOS-7-x86_64-DVD-1810.iso" -vmHost "server-pc.lan"
 
 # move the vm to a different datastore
-Change-VMDatastore -vmName "Docker Development (Lubuntu 19.04)" -datastore "seagullDatastore"
+#Change-VMDatastore -vmName "Docker Development (Lubuntu 19.04)" -datastore "seagullDatastore"
 
 
 # clone a virtual machine
-#Clone-VM -vmName "Lubuntu Clone" -datastore "seagullDatastore" -sourceVM $vmName
-#Clone-VM -vmName "Lubuntu Clone" -datastore "seagullDatastore" -sourceVM $vmName -referenceSnapshot "Clean Install"
+#Clone-VM -vmName "Lubuntu Clone" -datastore "seagullDatastore" -sourceVM "Docker Development (Lubuntu 19.04)" -vmHost "server-pc.lan"
+Clone-VM -vmName "Lubuntu Clone" -datastore "seagullDatastore" -sourceVM $vmName -referenceSnapshot "Clean Install" -vmHost "server-pc.lan"
