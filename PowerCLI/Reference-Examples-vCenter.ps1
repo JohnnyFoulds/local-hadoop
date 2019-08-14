@@ -7,7 +7,7 @@
 
 #--
 # Create a new Linux VM$
-function Create-LinuxVM([string]$vmName, [string]$datastore, [string]$dnsServer, [string]$domain, [string]$vmHost, [string]$isopath) {
+function Create-LinuxVM([string]$vmName, [string]$datastore, [string]$vmHost, [string]$isopath) {
     # create the new virtual machine
     $vm = New-VM -Server $server -Name $vmName -GuestId "centos7_64Guest" -Datastore $datastore -VMHost $vmHost -DiskGB 20 -MemoryGB 2 -CD
   
@@ -59,10 +59,10 @@ $server = Connect-VIServer -Verbose:$true -Server $vCenterHostName -User $vCente
 
 #---
 # create a new linux vm
-Create-LinuxVM -vmName "CentOS 7.6 base" -datastore "mainDatastore" -dnsServer 192.168.3.1 -domain "lan" -isopath "[omvDatastore] iso\CentOS-7-x86_64-DVD-1810.iso" -vmHost "server-pc.lan"
+#Create-LinuxVM -vmName "CentOS 7.6 base" -datastore "mainDatastore" -isopath "[omvDatastore] iso\CentOS-7-x86_64-DVD-1810.iso" -vmHost "server-pc.lan"
 
 # move the vm to a different datastore
-#Change-VMDatastore -vmName $vmName -datastore "seagullDatastore"
+Change-VMDatastore -vmName "Docker Development (Lubuntu 19.04)" -datastore "seagullDatastore"
 
 
 # clone a virtual machine
