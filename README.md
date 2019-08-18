@@ -12,3 +12,7 @@ This project creates a small local Hadoop cluster using [Cloudera Manager 6.3.0]
 - [vCenter](https://github.com/JohnnyFoulds/local-hadoop/wiki/vCenter) - The vCenter Installation which was a bit finicky at times.
 - [PowerCLI](https://github.com/JohnnyFoulds/local-hadoop/wiki/PowerCLI) - Some helpful reference examples on the essentials of using VMWare PowerCLI.
 - [vnc](https://github.com/JohnnyFoulds/local-hadoop/wiki/vnc) - Well not really, the better alternative to VNC when you are using VMWare.
+
+## Web References
+- Installation Path A - Automated Installation by Cloudera Manager - https://www.cloudera.com/documentation/enterprise/5-6-x/topics/cm_ig_install_path_a.html
+- Installing a Proof-of-Concept Cluster - https://www.cloudera.com/documentation/enterprise/6/6.3/topics/cm_ig_non_production.html
