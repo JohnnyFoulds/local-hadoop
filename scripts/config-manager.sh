@@ -30,8 +30,8 @@ echo $NETMASK
 echo '---'
 
 echo -e "\e[96mCopying remote config script...\e[39m"
-sshpass -p $PASSWORD scp remote-manconfig.sh $USER_NAME@$SERVER:~/
+sshpass -p $PASSWORD scp -oStrictHostKeyChecking=no remote-manconfig.sh $USER_NAME@$SERVER:~/
 
 echo -e "\e[96mExecuting remote config script...\e[39m"
 REMOTE_COMMAND="~/./remote-manconfig.sh -i ${IP_ADDRESS} -h ${HOST_NAME} -d${DNS} -g${GATEWAY} -n${NETMASK}"
-sshpass -p $PASSWORD ssh -t $USER_NAME@$SERVER $REMOTE_COMMAND
+sshpass -p $PASSWORD ssh -oStrictHostKeyChecking=no -t $USER_NAME@$SERVER $REMOTE_COMMAND

@@ -6,6 +6,7 @@ This project creates a small local Hadoop cluster using [Cloudera Manager 6.3.0]
 ## Installation Steps
 1. Create the [Base CentOS](https://github.com/JohnnyFoulds/local-hadoop/wiki/Base-Virtual-Machine) virtual machine.
 2. Create the [Base Manager](https://github.com/JohnnyFoulds/local-hadoop/wiki/Manager-Base) virtual machine.
+3. Create the [Worked Nodes](https://github.com/JohnnyFoulds/local-hadoop/wiki/Worker-Nodes).
 
 ## Pages of Interest
 - [vSphere](https://github.com/JohnnyFoulds/local-hadoop/wiki/vSphere) - This shows how the server configuration was done on the physical hardware.
