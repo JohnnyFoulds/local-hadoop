@@ -8,6 +8,8 @@ This project creates a small local Hadoop cluster using [Cloudera Manager 6.3.0]
 2. Create the [Base Manager](https://github.com/JohnnyFoulds/local-hadoop/wiki/Manager-Base) virtual machine.
 3. Create the [Worked Nodes](https://github.com/JohnnyFoulds/local-hadoop/wiki/Worker-Nodes).
 4. [Download and Run](https://github.com/JohnnyFoulds/local-hadoop/wiki/Cloudera-Manager-Install) the Cloudera Manager Server Installer.
+5. Navigate to `http://192.168.3.200:7180` and login in with `admin`, `admin`.
+6. Follow the installation wizard and use the `hadoop-manager.lan, hadoop-worker[01-03].lan` pattern when adding hosts.
 
 ## Pages of Interest
 - [vSphere](https://github.com/JohnnyFoulds/local-hadoop/wiki/vSphere) - This shows how the server configuration was done on the physical hardware.
