@@ -4,6 +4,6 @@
 <configuration>
 	<property>
 		<name>fs.defaultFS</name>
-		<value>hdfs://pshp111zatcwi:9000</value>
+		<value>hdfs://pshp111:9000</value>
 	</property>
 </configuration>
